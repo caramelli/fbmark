@@ -1,0 +1,9 @@
+Linux Framebuffer Benchmark
+---------------------------
+
+The fbmark package contains benchmarks that aim to test and measure the
+performance of the frame buffer device (/dev/fb0).
+
+Have fun,
+
+Nicolas Caramelli
