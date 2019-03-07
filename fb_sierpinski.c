@@ -65,7 +65,7 @@ int main(int argc, char **argv)
   gettimeofday(&last, NULL);
 
   while (time < sizeof(fps) / sizeof(float)) {
-    memset(data, 0, width * height * 3);
+    memset(data, 0, width * height * info.bits_per_pixel / 8);
     for (n = 0; n < 3; n++) {
       p[n].x = width / 2 + r * cos((n * 120 + angle) * M_PI / 180);
       p[n].y = height / 2 + r * sin((n * 120 + angle) * M_PI / 180);
@@ -78,12 +78,12 @@ int main(int argc, char **argv)
       v.y = (v.y + p[n].y) / 2. + .5;
       for (n = 0; n < 3; n++) {
         d[n] = (v.x - p[n].x) * (v.x - p[n].x) + (v.y - p[n].y) * (v.y - p[n].y);
-        data[v.y * width * 3 + v.x * 3 + 2 - n] = (1 - d[n] / (3. * r * r)) * 255;
+        data[v.y * width * info.bits_per_pixel / 8 + v.x * info.bits_per_pixel / 8 + 2 - n] = (1 - d[n] / (3. * r * r)) * 255;
       }
     }
 
     for (i = 0; i < height; i++)
-      memcpy(buffer + (posy + i) * info.xres * 3 + posx * 3, data + i * width * 3, width * 3);
+      memcpy(buffer + (posy + i) * info.xres * info.bits_per_pixel / 8 + posx * info.bits_per_pixel / 8, data + i * width * info.bits_per_pixel / 8, width * info.bits_per_pixel / 8);
 
     frames++;
     gettimeofday(&now, NULL);

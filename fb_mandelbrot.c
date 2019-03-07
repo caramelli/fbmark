@@ -68,7 +68,7 @@ int main(int argc, char **argv)
         } while (++c < iters);
 
         for (n = 0; n < 3; n++) {
-          buffer[(posy + i) * info.xres * 3 + (posx + j) * 3 + n] = c * 255 / iters;
+          buffer[(posy + i) * info.xres * info.bits_per_pixel / 8 + (posx + j) * info.bits_per_pixel / 8 + n] = c * 255 / iters;
         }
       }
     }

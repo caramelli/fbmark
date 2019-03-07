@@ -60,15 +60,15 @@ int main(int argc, char **argv)
     b = rand() % 256;
     x = rand() % (width - w);
     y = rand() % (height - h);
-    data = buffer + (posy + y) * info.xres * 3 + (posx + x) * 3;
+    data = buffer + (posy + y) * info.xres * info.bits_per_pixel / 8 + (posx + x) * info.bits_per_pixel / 8;
 
     for (i = 0; i < h; i++) {
       for (j = 0; j < w; j++) {
-        data[3*j + 2] = r;
-        data[3*j + 1] = g;
-        data[3*j    ] = b;
+        data[info.bits_per_pixel / 8 * j + 2] = r;
+        data[info.bits_per_pixel / 8 * j + 1] = g;
+        data[info.bits_per_pixel / 8 * j    ] = b;
       }
-      data += info.xres * 3;
+      data += info.xres * info.bits_per_pixel / 8;
     }
 
     count++;
