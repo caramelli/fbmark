@@ -43,7 +43,7 @@ int main(int argc, char **argv)
   float seconds, fps[16];
   struct timeval last, now;
 
-  fd = open("/dev/fb0", O_RDWR);
+  fd = getenv("FRAMEBUFFER") ? open(getenv("FRAMEBUFFER"), O_RDWR) : open("/dev/fb0", O_RDWR);
   ioctl(fd, FBIOGET_VSCREENINFO, &info);
 
   if (getenv("WIDTH")) width = atoi(getenv("WIDTH"));
@@ -90,7 +90,7 @@ int main(int argc, char **argv)
     seconds = (now.tv_sec - last.tv_sec) + (now.tv_usec - last.tv_usec) * 1e-6;
     if (seconds >= 1) {
       fps[time] = frames / seconds;
-      if (fps[time] < 4)
+      if (fps[time] < (getenv("SIERPINSKI_FPS") ? atoi(getenv("SIERPINSKI_FPS")) : 4))
         break;
       last = now;
       frames = 0;

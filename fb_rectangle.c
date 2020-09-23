@@ -34,7 +34,7 @@ int main(int argc, char **argv)
   unsigned int w, h, i, j, x, y, start, end, count;
   struct timeval tv;
 
-  fd = open("/dev/fb0", O_RDWR);
+  fd = getenv("FRAMEBUFFER") ? open(getenv("FRAMEBUFFER"), O_RDWR) : open("/dev/fb0", O_RDWR);
   ioctl(fd, FBIOGET_VSCREENINFO, &info);
 
   if (getenv("WIDTH")) width = atoi(getenv("WIDTH"));
