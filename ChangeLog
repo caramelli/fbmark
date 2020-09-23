@@ -1,3 +1,15 @@
+commit e45c31017c97c2b46e36e41b26e34451b735efff
+Author: Nicolas Caramelli <caramelli.devel@gmail.com>
+Date:   Wed Sep 23 11:14:17 2020 +0200
+
+    add FRAMEBUFFER environment variable
+
+commit fcb9c2a1c0e9615cb355bcd71c09b5938f3962cf
+Author: Nicolas Caramelli <caramelli.devel@gmail.com>
+Date:   Thu Mar 7 19:42:55 2019 +0100
+
+    update ChangeLog
+
 commit 1252dab4d617e3de4a7e836c3912301675e3d3bb
 Author: Nicolas Caramelli <caramelli.devel@gmail.com>
 Date:   Thu Mar 7 19:42:32 2019 +0100
