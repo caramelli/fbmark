@@ -27,7 +27,7 @@
 #include <sys/mman.h>
 #include <sys/time.h>
 
-#define MIN(a,b) (((a)<(b))?(a):(b))
+#define MIN(a,b) ((a) < (b) ? (a) : (b))
 
 typedef struct {
   int x;
@@ -46,6 +46,11 @@ int main(int argc, char **argv)
   struct timeval last, now;
 
   fd = getenv("FRAMEBUFFER") ? open(getenv("FRAMEBUFFER"), O_RDWR) : open("/dev/fb0", O_RDWR);
+  if (fd == -1) {
+    printf("Failed to open Framebuffer device: %m\n");
+    return 1;
+  }
+
   ioctl(fd, FBIOGET_VSCREENINFO, &info);
 
   if (getenv("WIDTH")) width = atoi(getenv("WIDTH"));
@@ -61,7 +66,7 @@ int main(int argc, char **argv)
   buffer = mmap(NULL, len, PROT_WRITE, MAP_SHARED, fd, 0);
   data = malloc(width * height * info.bits_per_pixel / 8);
   angle = 0;
-  r = MIN(height, width) / 2 - 8;
+  r = MIN(width, height) / 2 - 8;
   iters = 1024;
   frames = time = 0;
   gettimeofday(&last, NULL);
